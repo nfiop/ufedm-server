@@ -1,0 +1,3 @@
+[submodule "libs/ufedmd"]
+	path = libs/ufedmd
+	url = https://github.com/nfiop/ufedmd
