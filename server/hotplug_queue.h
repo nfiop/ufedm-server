@@ -12,7 +12,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-#define QUEUE_SIZE 256
+#define HOTPLUG_QUEUE_SIZE 256
 
 #include "common/errno.h"
 
@@ -50,7 +50,7 @@ typedef struct {
 } hotplug_event_t;
 
 typedef struct {
-	hotplug_event_t items[QUEUE_SIZE];
+	hotplug_event_t items[HOTPLUG_QUEUE_SIZE];
 	int head;
 	int tail;
 	pthread_mutex_t mutex;
@@ -59,14 +59,15 @@ typedef struct {
 
 extern hotplug_queue_t g_hotplug_queue;
 
-void queue_init(hotplug_queue_t *q);
-errno_t queue_push(hotplug_queue_t *q, hotplug_event_t *queued_event);
-void queue_pop_blocking(hotplug_queue_t *q, hotplug_event_t *recv_event);
+void hotplug_queue_init(hotplug_queue_t *q);
+errno_t hotplug_queue_push(hotplug_queue_t *q, hotplug_event_t *queued_event);
+void hotplug_queue_pop_blocking(
+    hotplug_queue_t *q, hotplug_event_t *recv_event);
 
-#define GLOBAL_QUEUE_PUSH_HOTPLUG_EVENT(__queued_event)                        \
-	queue_push(&g_hotplug_queue, __queued_event)
+#define GLOBAL_HOTPLUG_QUEUE_PUSH_EVENT(__queued_event)                        \
+	hotplug_queue_push(&g_hotplug_queue, __queued_event)
 
-#define GLOBAL_QUEUE_POP_HOTPLUG_EVENT(__recv_event)                           \
-	queue_pop_blocking(&g_hotplug_queue, __recv_event)
+#define GLOBAL_HOTPLUG_QUEUE_POP_EVENT(__recv_event)                           \
+	hotplug_queue_pop_blocking(&g_hotplug_queue, __recv_event)
 
 #endif

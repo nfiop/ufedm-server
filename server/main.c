@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 	/* Initialize a POSIX-based hotplug queue for delivering hot-plug events
 	 * from the platform.
 	 */
-	queue_init(&g_hotplug_queue);
+	hotplug_queue_init(&g_hotplug_queue);
 
 	/* Initialize platform I/O ops vtable and platform-specific structures
 	 */

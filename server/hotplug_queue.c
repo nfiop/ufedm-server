@@ -9,18 +9,18 @@
 #include "server/hotplug_queue.h"
 #include <string.h>
 
-void queue_init(hotplug_queue_t *q)
+void hotplug_queue_init(hotplug_queue_t *q)
 {
 	q->head = q->tail = 0;
 	pthread_mutex_init(&q->mutex, NULL);
 	pthread_cond_init(&q->cond, NULL);
 }
 
-errno_t queue_push(hotplug_queue_t *q, hotplug_event_t *event)
+errno_t hotplug_queue_push(hotplug_queue_t *q, hotplug_event_t *event)
 {
 	pthread_mutex_lock(&q->mutex);
 
-	int next = (q->tail + 1) % QUEUE_SIZE;
+	int next = (q->tail + 1) % HOTPLUG_QUEUE_SIZE;
 	if (next == q->head) {
 		// queue full
 		pthread_mutex_unlock(&q->mutex);
@@ -35,7 +35,7 @@ errno_t queue_push(hotplug_queue_t *q, hotplug_event_t *event)
 	return 0;
 }
 
-void queue_pop_blocking(hotplug_queue_t *q, hotplug_event_t *recv_event)
+void hotplug_queue_pop_blocking(hotplug_queue_t *q, hotplug_event_t *recv_event)
 {
 	pthread_mutex_lock(&q->mutex);
 
@@ -44,7 +44,7 @@ void queue_pop_blocking(hotplug_queue_t *q, hotplug_event_t *recv_event)
 	}
 
 	memcpy(recv_event, &q->items[q->head], sizeof(hotplug_event_t));
-	q->head = (q->head + 1) % QUEUE_SIZE;
+	q->head = (q->head + 1) % HOTPLUG_QUEUE_SIZE;
 
 	pthread_mutex_unlock(&q->mutex);
 }
