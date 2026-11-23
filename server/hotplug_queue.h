@@ -14,7 +14,7 @@
 
 #define QUEUE_SIZE 256
 
-#include "common/types.h"
+#include "common/errno.h"
 
 typedef enum {
 	HOTPLUG_EVENT_NEW_ADAPTER,

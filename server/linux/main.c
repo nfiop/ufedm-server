@@ -10,9 +10,12 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "common/errno.h"
 #include "common/logger.h"
 #include "common/prog_opts.h"
 #include "common/types.h"
+
+#include "ufedmd-common/macros.h"
 
 errno_t is_module_loaded(const char *module_name)
 {

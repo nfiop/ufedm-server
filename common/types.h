@@ -20,41 +20,8 @@
 /* For loading of MTD configuration, we simply use Jansson directly */
 #include <jansson.h>
 
-#define MAX_NAME_LEN 256
-#define UNUSED(__x) (void)__x
-
-/* Used for functions that return errno number -
- * either zero or a negative number (for POSIX error).
- * for example -
- * ```
- *	return -ENOMEM;
- * ```
- */
-typedef int errno_t;
-
 /* Used for Indexed objects, without worrying about overflow */
 typedef uint64_t idx_t;
-
-/* This macro is inspired from the Linux kernel - it should allocate
- * a memory area and zero it afterwards.
- */
-#define zalloc_obj(__x) calloc(1, sizeof(*__x))
-
-struct range {
-	uint64_t start;
-	uint64_t length;
-};
-
-static inline void copy_range_object(struct range *from, struct range *to)
-{
-	to->start = from->start;
-	to->length = from->length;
-}
-
-struct byte_array {
-	uint8_t *buf;
-	size_t length;
-};
 
 typedef enum host_intf_type {
 	HOST_INTF_TYPE_PLATFORM,

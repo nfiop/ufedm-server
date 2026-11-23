@@ -12,9 +12,9 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "common/errno.h"
 #include "common/logger.h"
 #include "common/prog_opts.h"
-#include "common/types.h"
 
 static void print_usage(const char *prog)
 {

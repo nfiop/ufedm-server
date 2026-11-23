@@ -10,11 +10,13 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "common/errno.h"
 #include "common/logger.h"
 #include "common/prog_opts.h"
 #include "common/types.h"
 
 #include "ufedmd-common/ints.h"
+#include "ufedmd-common/macros.h"
 
 #define DEFAULT_NAND_PAGE_DATA_SIZE 2048
 #define DEFAULT_NAND_PAGE_OOB_SIZE 64

@@ -19,6 +19,7 @@
 #error "Not a supported OS"
 #endif
 
+#include "common/errno.h"
 #include "common/logger.h"
 #include "common/prog_opts.h"
 #include "common/types.h"
