@@ -24,7 +24,8 @@ static void print_usage(const char *prog)
 	    "Options:\n"
 	    "  -c, --config FILE                JSON mapping configuration "
 	    "file\n"
-	    "  -p, --port PORT                  Server port (default: 8080)\n"
+	    "  -p, --tcp-port PORT              Server TCP port (default: "
+	    "8080)\n"
 	    "  -D, --demo                       Default demo configuration "
 	    "mode (fake device, disables config)\n"
 	    "  -d, --non-detachable-sockets     Force non-detachable sockets\n"
@@ -77,7 +78,7 @@ errno_t parse_args(int argc, char **argv, bool *should_exit)
 {
 	static const struct option long_options[] = {
 	    {"config", required_argument, NULL, 'c'},
-	    {"port", required_argument, NULL, 'p'},
+	    {"tcp-port", required_argument, NULL, 'p'},
 	    {"demo", no_argument, NULL, 'D'},
 	    {"non-detachable-sockets", no_argument, NULL, 'd'},
 	    {"address", required_argument, NULL, 'a'},
