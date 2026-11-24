@@ -36,16 +36,16 @@ ExternalProject_Add(ufedmd
 
     BUILD_COMMAND
         ${CMAKE_COMMAND} --build <BINARY_DIR>
-
-    INSTALL_COMMAND
-        ${CMAKE_COMMAND} --install <BINARY_DIR>
-
     BUILD_ALWAYS
         TRUE
 )
 
-set(UFEDMD_LIB_LIBRARY
-    "${UFEDMD_LIB_INSTALL_DIR}/lib/libufedmd.a"
+set(UFEDMD_LIB_ARCHIVE_OBJ_DIR
+    "${UFEDMD_LIB_INSTALL_DIR}/lib/"
+)
+
+set(UFEDMD_LIB_ARCHIVE
+    "${UFEDMD_LIB_ARCHIVE_OBJ_DIR}/libufedmd.a"
 )
 
 set(UFEDMD_LIB_INCLUDE_DIR
