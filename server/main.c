@@ -24,6 +24,7 @@
 #include "common/prog_opts.h"
 #include "common/types.h"
 #include "server/hotplug_queue.h"
+#include "server/pid_lock.h"
 
 extern errno_t platform_main(struct platform *, struct options *opts);
 extern errno_t demo_platform_main(struct platform *, struct options *opts);
@@ -73,6 +74,28 @@ int main(int argc, char **argv)
 	 */
 	if (should_exit)
 		return EXIT_SUCCESS;
+
+	/* Now is the real deal. We have to acquire the PID lock.
+	 * Main reason for this is the fact that we don't want to
+	 * to rely merely on the ufedm-proxy open lock - we want
+	 * there would be one instance running with full control
+	 * of all ufedm-proxy devices and MTDs.
+	 *
+	 * On Windows and any other non-Linux OS, this is considerably
+	 * more important - everything is "emulated", and nothing guarantees
+	 * proper locking on USB NAND adapters besides this PID lock.
+	 */
+	rc = acquire_pid_file_lock();
+	if (rc < 0) {
+		if (rc == -EBUSY) {
+			LOG_ERROR("Another instance is running\n");
+		} else {
+			LOG_INFO("Error while trying to acquire PID lock: %s\n",
+			    strerror(-rc));
+		}
+
+		return EXIT_FAILURE;
+	}
 
 	/* Initialize a POSIX-based hotplug queue for delivering hot-plug events
 	 * from the platform.

@@ -25,6 +25,7 @@
 /*
  * Convenience macros.
  */
+#define LOG_ERROR(...) fprintf(stderr, __VA_ARGS__)
 #define LOG_INFO(...) LOG_VERBOSE(1, __VA_ARGS__)
 #define LOG_DEBUG(...) LOG_VERBOSE(2, __VA_ARGS__)
 #define LOG_TRACE(...) LOG_VERBOSE(3, __VA_ARGS__)

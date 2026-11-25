@@ -14,6 +14,7 @@ message(STATUS "System: ${CMAKE_SYSTEM_NAME}")
 set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/server/main.c 
             ${CMAKE_CURRENT_SOURCE_DIR}/server/params.c
             ${CMAKE_CURRENT_SOURCE_DIR}/server/hotplug_queue.c
+            ${CMAKE_CURRENT_SOURCE_DIR}/server/pid_lock.c	
             ${CMAKE_CURRENT_SOURCE_DIR}/server/demo/main.c)
 
 set(EXTERNAL_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/libs/os-lock/lock.c)
@@ -33,6 +34,7 @@ target_compile_options(ImNANDConnector PRIVATE -Wall -Wextra -Werror)
 target_include_directories(ImNANDConnector PRIVATE 
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}/libs/jansson/src
+        ${CMAKE_CURRENT_SOURCE_DIR}/libs/os-lock
         ${UFEDMD_SRC_DIR})
 
 target_link_libraries(ImNANDConnector PRIVATE uv_a ${JANSSON_LIBRARY} ${UFEDMD_LIB_ARCHIVE})
