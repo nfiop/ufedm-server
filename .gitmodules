@@ -1,3 +1,6 @@
 [submodule "libs/ufedmd"]
 	path = libs/ufedmd
 	url = https://github.com/nfiop/ufedmd
+[submodule "libs/os-lock"]
+	path = libs/os-lock
+	url = https://github.com/nfiop/os-lock

@@ -16,11 +16,13 @@ set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/server/main.c
             ${CMAKE_CURRENT_SOURCE_DIR}/server/hotplug_queue.c
             ${CMAKE_CURRENT_SOURCE_DIR}/server/demo/main.c)
 
+set(EXTERNAL_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/libs/os-lock/lock.c)
+
 # FIXME: Add a flag to select other platforms (like Windows, or possibly
 # other Linux libc's)
 set(PLATFORM_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/server/linux/main.c)
 
-add_executable(ImNANDConnector ${SOURCES} ${PLATFORM_SOURCES})
+add_executable(ImNANDConnector ${SOURCES} ${EXTERNAL_SOURCES} ${PLATFORM_SOURCES})
 
 # We don't include jansson or ufedm-dev - these are dependencies of ufedmd
 # and therefore are built as well.
