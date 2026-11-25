@@ -33,7 +33,7 @@ target_include_directories(ImNANDConnector PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/libs/jansson/src
         ${UFEDMD_SRC_DIR})
 
-target_link_libraries(ImNANDConnector PRIVATE uv_a ${UFEDMD_LIB_ARCHIVE})
+target_link_libraries(ImNANDConnector PRIVATE uv_a ${JANSSON_LIBRARY} ${UFEDMD_LIB_ARCHIVE})
 target_link_options(ImNANDConnector PRIVATE -static)
 
 # Optional: debug build support
